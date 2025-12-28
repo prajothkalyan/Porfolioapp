@@ -438,7 +438,7 @@ useEffect(() => {
   <section>
    <div className="cv-download reveal">
   <a
-    href="https://porfolioapp-iq41anmoa-kalyan-bs-projects.vercel.app/src/Resume - Kalyan Balasubramanian.pdf"
+    href="/src/Resume - Kalyan Balasubramanian.pdf"
     download
     className="cv-btn"
   >
