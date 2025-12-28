@@ -7,6 +7,7 @@ import Linkedin from "./assets/linkedin.png";
 const App = () => {
   
 const [activeSection, setActiveSection] = useState("about");
+const [menuOpen, setMenuOpen] = useState(false);
 const aboutRef = useRef(null);
 const portfolioRef = useRef(null);
 const Experience = useRef(null);
@@ -110,10 +111,8 @@ useEffect(() => {
     <button onClick={() => scrollToSection(portfolioRef)}>Portfolio</button>
 		<button onClick={() => scrollToSection(Experience)}>Experience</button>
 		<button onClick={() => scrollToSection(Contact)}>Contact</button>
-    
-    */}
-      
-  <div className="top-nav">
+
+     <div className="top-nav">
     <button className={activeSection === "about" ? "active" : ""}
     onClick={() => aboutRef.current.scrollIntoView({ behavior: "smooth" })}>About</button>
 
@@ -129,6 +128,74 @@ useEffect(() => {
 		<button className={activeSection === "contact" ? "active" : ""}
     onClick={() => Contact.current.scrollIntoView({ behavior: "smooth" })}>Contact</button>
   </div>
+
+    
+    */}
+      
+  <div className="top-nav-wrapper">
+
+  {/* MOBILE MENU ICON */}
+  <button
+    className="menu-toggle"
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    ☰
+  </button>
+
+  {/* NAV BUTTONS */}
+  <div className={`top-nav ${menuOpen ? "open" : ""}`}>
+    <button
+      className={activeSection === "about" ? "active" : ""}
+      onClick={() => {
+        aboutRef.current.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }}
+    >
+      About
+    </button>
+
+    <button
+      className={activeSection === "portfolio" ? "active" : ""}
+      onClick={() => {
+        portfolioRef.current.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }}
+    >
+      Portfolio
+    </button>
+
+    <button
+      className={activeSection === "experience" ? "active" : ""}
+      onClick={() => {
+        Experience.current.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }}
+    >
+      Experience
+    </button>
+
+    <button
+      className={activeSection === "blog" ? "active" : ""}
+      onClick={() => {
+        blogRef.current.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }}
+    >
+      Blog
+    </button>
+
+    <button
+      className={activeSection === "contact" ? "active" : ""}
+      onClick={() => {
+        Contact.current.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }}
+    >
+      Contact
+    </button>
+  </div>
+
+</div>
 
 
       {/* HERO */}
@@ -476,6 +543,29 @@ useEffect(() => {
 
 
 		/* TOP FLOAT NAV BUTTONS */
+
+
+.top-nav-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: rgba(15,23,42,0.7);
+  color: #07b6d9ff;
+  border: 1px solid rgba(57, 188, 232, 0.4);
+  border-radius: 25%;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+}
+
+
+
 .top-nav {
   position: fixed;
   top: 20px;
@@ -1146,6 +1236,39 @@ useEffect(() => {
   transform: translateX(0);
 }
 
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .top-nav {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    flex-direction: column;
+    background: rgba(2,6,23,0.95);
+    padding: 1rem;
+    border-radius: 16px;
+    gap: 10px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .top-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .top-nav button {
+    width: 160px;
+    justify-content: center;
+  }
+}
 
 
 
