@@ -438,7 +438,7 @@ useEffect(() => {
   <section>
    <div className="cv-download reveal">
   <a
-    href="/src/Resume - Kalyan Balasubramanian.pdf"
+    href="/Resume - Kalyan Balasubramanian.pdf"
     download
     className="cv-btn"
   >
