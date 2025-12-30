@@ -1296,6 +1296,7 @@ button:hover ~ .cursor-ring {
   font-weight: 500;
   text-decoration: none;
   color: #020617;
+  cursor: none;
   background: linear-gradient(90deg, #38bdf8, #22d3ee);
   box-shadow: 0 0 30px rgba(56,189,248,0.8);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
