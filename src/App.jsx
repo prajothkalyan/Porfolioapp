@@ -106,7 +106,7 @@ useEffect(() => {
   const dot = document.querySelector(".cursor-dot");
   const ring = document.querySelector(".cursor-ring");
   const hoverables = document.querySelectorAll(
-  "a, button"
+  "button"
 );
 
 hoverables.forEach((el) => {
