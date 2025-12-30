@@ -1266,6 +1266,9 @@ useEffect(() => {
 
   .top-nav button {
     width: 300px;
+    padding : 20px 20px;
+    font-size: 1.08rem;
+    gap : 50px;
     justify-content: center;
   }
 }
