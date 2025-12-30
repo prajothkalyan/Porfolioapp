@@ -1249,7 +1249,7 @@ useEffect(() => {
     background: rgba(2,6,23,0.95);
     padding: 1rem;
     border-radius: 16px;
-    gap: 10px;
+    gap: 20px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.7);
 
     opacity: 0;
@@ -1268,7 +1268,6 @@ useEffect(() => {
     width: 300px;
     padding : 20px 20px;
     font-size: 1.08rem;
-    gap : 50px;
     justify-content: center;
   }
 }
