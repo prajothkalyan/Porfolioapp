@@ -1265,7 +1265,7 @@ useEffect(() => {
   }
 
   .top-nav button {
-    width: 160px;
+    width: 300px;
     justify-content: center;
   }
 }
