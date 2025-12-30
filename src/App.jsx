@@ -102,6 +102,53 @@ useEffect(() => {
   return () => observer.disconnect();
 }, []);
 
+useEffect(() => {
+  const dot = document.querySelector(".cursor-dot");
+  const ring = document.querySelector(".cursor-ring");
+  const hoverables = document.querySelectorAll(
+  "a, button, .portfolio-card, .tech-card"
+);
+
+hoverables.forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    ring.classList.add("cursor-hover");
+  });
+  el.addEventListener("mouseleave", () => {
+    ring.classList.remove("cursor-hover");
+  });
+});
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let ringX = 0;
+  let ringY = 0;
+
+  const moveCursor = (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    dot.style.left = `${mouseX}px`;
+    dot.style.top = `${mouseY}px`;
+  };
+
+  const animateRing = () => {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(animateRing);
+  };
+
+  window.addEventListener("mousemove", moveCursor);
+  animateRing();
+
+  return () => {
+    window.removeEventListener("mousemove", moveCursor);
+  };
+}, []);
+
 
   return (
     <>
@@ -501,6 +548,12 @@ useEffect(() => {
 
 </section>
 
+{/* CUSTOM CURSOR */}
+<div className="cursor-dot"></div>
+<div className="cursor-ring"></div>
+
+
+
 {/* DOWNLOAD CV */}
   <section>
    <div className="cv-download reveal">
@@ -582,7 +635,7 @@ useEffect(() => {
   background: rgba(15,23,42,0.7);
   color: #38bdf8;
   font-size: 0.85rem;
-  cursor: pointer;
+  cursor : none;
   backdrop-filter: blur(40px);
   transition: all 0.3s ease;
 }
@@ -674,6 +727,50 @@ useEffect(() => {
   object-fit: cover;
   background: #000;
 }
+
+
+/* HIDE DEFAULT CURSOR */
+body {
+  cursor: none;
+}
+
+/* INNER DOT */
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #38bdf8;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+/* OUTER RING */
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(56,189,248,0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.3s ease;
+}
+
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring {
+  transform: translate(-50%, -50%) scale(1.6);
+  border-color: #22d3ee;
+}
+
+.cursor-ring.cursor-hover {
+  transform: translate(-50%, -50%) scale(1.6);
+  border-color: #22d3ee;
+}
+
+
 
 /* ANIMATIONS */
 @keyframes floatImage {
@@ -1268,7 +1365,20 @@ useEffect(() => {
     width: 300px;
     padding : 20px 20px;
     font-size: 1.08rem;
+    cursor: pointer;
     justify-content: center;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
   }
 }
 
