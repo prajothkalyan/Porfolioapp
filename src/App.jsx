@@ -1272,6 +1272,7 @@ button:hover ~ .cursor-ring {
   height: 100%;
   padding: 2.2rem;
   display: flex;
+  cursor: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
