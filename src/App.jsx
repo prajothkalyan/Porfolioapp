@@ -159,6 +159,21 @@ useEffect(() => {
   return () => window.removeEventListener("scroll", clearActive);
 }, []);
 
+useEffect(() => {
+  const clearFocus = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
+
+  window.addEventListener("touchmove", clearFocus);
+  window.addEventListener("scroll", clearFocus);
+
+  return () => {
+    window.removeEventListener("touchmove", clearFocus);
+    window.removeEventListener("scroll", clearFocus);
+  };
+}, []);
 
 
 
@@ -345,7 +360,7 @@ useEffect(() => {
         <h2 className="section-title">Portfolio</h2>
 
         <div className="portfolio-grid">
-          <div className="portfolio-card">
+          <div className="portfolio-card" tabIndex={-1}>
 			<span className="icon-box">🚀</span>
             <h3>DevOps & Automation</h3>
             <p>
@@ -354,7 +369,7 @@ useEffect(() => {
             </p>
           </div>
 
-          <div className="portfolio-card">
+          <div className="portfolio-card" tabIndex={-1}>
 			<span className="icon-box">☁️</span>
             <h3>Cloud Infrastructure</h3>
             <p>
@@ -363,7 +378,7 @@ useEffect(() => {
             </p>
           </div>
 
-          <div className="portfolio-card">
+          <div className="portfolio-card" tabIndex={-1}>
 			<span className="icon-box">📈</span>
             <h3>Site Reliability Engineering</h3>
             <p>
@@ -372,7 +387,7 @@ useEffect(() => {
             </p>
           </div>
 
-          <div className="portfolio-card">
+          <div className="portfolio-card" tabIndex={-1}>
 			<span className="icon-box">📦</span>
             <h3>Container Orchestration</h3>
             <p>
@@ -381,7 +396,7 @@ useEffect(() => {
             </p>
           </div>
 
-          <div className="portfolio-card">
+          <div className="portfolio-card" tabIndex={-1}>
 			<span className="icon-box">👨‍💻</span>
             <h3>Consultant</h3>
             <p>
@@ -1349,9 +1364,15 @@ button:hover ~ .cursor-ring {
 
 
 @media (hover: none) and (pointer: coarse) {
-  .portfolio-card,
+   
+ .portfolio-card {
+    outline: none;
+   -webkit-tap-highlight-color: transparent;
+  }
+
   .portfolio-card:hover,
-  .icon-box,
+  .portfolio-card:active,
+  .portfolio-card:focus,
   .tech-card:hover,
   .contact-card:hover,
   .expert-card:hover,
@@ -1361,9 +1382,18 @@ button:hover ~ .cursor-ring {
     box-shadow: 0 25px 50px rgba(0,0,0,0.6);
   }
 
-  .portfolio-card::before,
+  .portfolio-card::before {
+    opacity: 0 !important;
+  }
+
   .tech-card::before {
     opacity: 0;
+  }
+
+  .portfolio-card:focus-visible {
+    transform: none !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6) !important;
+    background: linear-gradient(135deg, #0f172a, #020617) !important;
   }
 }
 
