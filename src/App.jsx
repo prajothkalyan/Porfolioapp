@@ -20,11 +20,9 @@ const sectionColors = {
   about: "#38bdf8",
   portfolio: "#ee22eeff",
   experience: "#f97316",
-  blog: "#a78bfa",
-  contact: "#34d399",
+  blog: "#fbf71fff",
+  contact: "#13e195ff",
 };
-
-
 
 
 useEffect(() => {
