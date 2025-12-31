@@ -764,8 +764,8 @@ body {
 /* INNER DOT */
 .cursor-dot {
   position: fixed;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: #38bdf8;
   border-radius: 50%;
   pointer-events: none;
