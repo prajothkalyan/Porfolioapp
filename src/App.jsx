@@ -1352,6 +1352,7 @@ button:hover ~ .cursor-ring {
   .portfolio-card:hover,
   .tech-card:hover,
   .contact-card:hover,
+  .expert-card:hover,
   .ui-card:hover,
   .blog-card:hover {
     transform: none;
