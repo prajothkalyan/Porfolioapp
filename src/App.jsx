@@ -150,6 +150,18 @@ hoverables.forEach((el) => {
 }, []);
 
 
+useEffect(() => {
+  const clearActive = () => {
+    document.activeElement?.blur();
+  };
+
+  window.addEventListener("scroll", clearActive);
+  return () => window.removeEventListener("scroll", clearActive);
+}, []);
+
+
+
+
   return (
     <>
     {/* TEMP BUTTONS (You can remove later & connect Navbar)
@@ -1335,6 +1347,24 @@ button:hover ~ .cursor-ring {
   transform: translateX(0);
 }
 
+
+@media (hover: none) and (pointer: coarse) {
+  .portfolio-card:hover,
+  .tech-card:hover,
+  .contact-card:hover,
+  .ui-card:hover,
+  .blog-card:hover {
+    transform: none;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  }
+
+  .portfolio-card::before,
+  .tech-card::before {
+    opacity: 0;
+  }
+}
+
+
 @media (max-width: 900px) {
   .menu-toggle {
     display: block;
@@ -1479,6 +1509,15 @@ useEffect(() => {
     clearTimeout(timer);
   };
 }, []); */
+
+
+
+
+
+
+
+
+
 
 
 
