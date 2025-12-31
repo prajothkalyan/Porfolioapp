@@ -1349,6 +1349,7 @@ button:hover ~ .cursor-ring {
 
 
 @media (hover: none) and (pointer: coarse) {
+  .portfolio-card,
   .portfolio-card:hover,
   .tech-card:hover,
   .contact-card:hover,
