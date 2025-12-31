@@ -7,12 +7,25 @@ import Linkedin from "./assets/linkedin.png";
 const App = () => {
   
 const [activeSection, setActiveSection] = useState("about");
+const [scrollProgress, setScrollProgress] = useState(0);
 const [menuOpen, setMenuOpen] = useState(false);
 const aboutRef = useRef(null);
 const portfolioRef = useRef(null);
 const Experience = useRef(null);
 const blogRef = useRef(null);
 const Contact = useRef(null);
+
+
+const sectionColors = {
+  about: "#38bdf8",
+  portfolio: "#ee22eeff",
+  experience: "#f97316",
+  blog: "#a78bfa",
+  contact: "#34d399",
+};
+
+
+
 
 useEffect(() => {
   window.scrollTo(0, 0);
@@ -173,6 +186,22 @@ useEffect(() => {
     window.removeEventListener("touchmove", clearFocus);
     window.removeEventListener("scroll", clearFocus);
   };
+}, []);
+
+
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const docHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+
+    const progress = (scrollTop / docHeight) * 100;
+    setScrollProgress(progress);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
 }, []);
 
 
@@ -579,6 +608,18 @@ useEffect(() => {
 <div className="cursor-dot"></div>
 <div className="cursor-ring"></div>
 
+
+{/* SCROLL PROGRESS BAR */}
+<div className="scroll-progress">
+  <div
+    className="scroll-progress-bar"
+    style={{
+      width: `${scrollProgress}%`,
+      background:
+        sectionColors[activeSection] || "#38bdf8",
+    }}
+  />
+</div>
 
 
 {/* DOWNLOAD CV */}
@@ -1363,6 +1404,28 @@ button:hover ~ .cursor-ring {
 }
 
 
+/* SCROLL PROGRESS CONTAINER */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 2000;
+}
+
+/* PROGRESS LINE */
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8, #22d3ee);
+  box-shadow: 0 0 12px rgba(56,189,248,0.9);
+  transition: width 0.15s ease-out;
+}
+
+
+
 @media (hover: none) and (pointer: coarse) {
    
  .portfolio-card {
@@ -1447,6 +1510,11 @@ button:hover ~ .cursor-ring {
   }
 }
 
+@media (min-width: 900px) {
+  .scroll-progress {
+    height: 4px;
+  }
+}
 
 
 @media (max-width: 900px) {
